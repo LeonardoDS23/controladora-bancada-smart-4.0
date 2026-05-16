@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tecdes.smart.app_smart_40.model.enums.CorBloco;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CheckConstraint;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "t_smt_bloco")
+@Table(
+    name = "T_SMT_BLOCO",
+    check = {
+        @CheckConstraint(
+            name = "CK_BLOCO_COR",
+            constraint = "st_cor_bloco IN (1, 2, 3)"
+        )
+    }
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
